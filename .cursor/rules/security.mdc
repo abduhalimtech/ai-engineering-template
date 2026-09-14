@@ -1,0 +1,31 @@
+---
+description: Security constraints for CRM data, secrets, auth, and production
+alwaysApply: true
+---
+
+# Security
+
+CRM work handles customer and business data. Default to HIGH when auth, PII, tenancy, payments, webhooks, or secrets are in the blast radius.
+
+## Secrets
+
+Never print or commit: `.env`, `.env.production`, credentials, private keys, API tokens, production config. Do not copy production secrets into test config. Do not paste secret values into task files, reviews, or chat summaries.
+
+`.env.example` may document **key names** only.
+
+## Must review on HIGH/CRITICAL diffs
+
+- Authn/authz and privilege escalation
+- IDOR/BOLA and missing tenant/user scoping
+- Injection, XSS, CSRF, SSRF, path traversal
+- Webhook signatures, replay, and idempotency
+- Upload validation and storage paths
+- Sensitive logging and PII in exports
+- Session/cookie/token handling
+- Rate limiting on auth and destructive endpoints
+
+## Production
+
+Agents may prepare plans and code. They must not casually execute production deploys, credential rotation, destructive migrations, or irreversible external API calls. Require explicit human approval.
+
+Security Auditor is for HIGH/CRITICAL or a real new attack surface — not a generic checklist on typo PRs.

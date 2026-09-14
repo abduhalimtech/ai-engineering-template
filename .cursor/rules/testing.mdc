@@ -1,0 +1,27 @@
+---
+description: Canonical test and quality-check commands for this repository
+alwaysApply: true
+---
+
+# Testing and deterministic checks
+
+No test runner, linter, typechecker, or build command is configured yet. Discover commands from the stack when it appears. Record the winners here and stop rediscovering them.
+
+Look at (only those that exist): `package.json` scripts, `composer.json` / Pest / PHPUnit, `pyproject.toml`, `Makefile`, `Justfile`, `Dockerfile`, `.github/workflows/*`.
+
+## Policy
+
+- Tests → execute tests. Lint → execute linter. Format → execute formatter. Types → execute typechecker. Build → execute build.
+- Never report `PASSED` for a check that was `NOT_RUN`.
+- Do not weaken or skip tests to obtain green CI.
+- Prefer the project's existing tool over installing a competing one.
+- Add a new check automatically only if it is standard for the stack, lightweight, and clearly valuable; otherwise recommend it.
+
+## Expected coverage (once a stack exists)
+
+- Unit tests for isolated logic.
+- Integration tests for persistence, HTTP, jobs, and external boundaries.
+- Mock third-party APIs; never hit production.
+- Browser/UI verification when the change is user-visible and tools exist.
+
+Until commands exist, verification status is `NOT_APPLICABLE` or `NOT_RUN`, with a reason.

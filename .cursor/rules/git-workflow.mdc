@@ -1,0 +1,44 @@
+---
+description: Git branch, commit, PR, and merge policy for this repository
+alwaysApply: true
+---
+
+# Git workflow
+
+Git is **not initialized** in this workspace yet. When it is, use this policy. Do not invent a second convention.
+
+## Branches
+
+```text
+feat/TASK-123-short-description
+fix/TASK-123-short-description
+refactor/TASK-123-short-description
+chore/TASK-123-short-description
+```
+
+Without a task ID, use a concise descriptive name. Do not commit directly to `main` or `master`.
+
+## Commits
+
+Conventional Commits, logically scoped, no secrets, no unrelated files, no AI fluff or `Co-authored-by` / `Generated-by` / `Created-by` AI trailers unless the platform requires them.
+
+```text
+feat(auth): add persistent login support
+fix(billing): make webhook processing idempotent
+```
+
+Do not amend pushed commits. Do not force-push protected branches. Do not rewrite shared history without explicit human approval.
+
+## Merge
+
+Agents do not merge important PRs or deploy production. Human merge after: required CI, review, resolved blockers.
+
+Recommended GitHub branch protection (configure in the host UI; agents must not change repo permissions unasked): require PRs, required status checks, conversation resolution, no force-push, no direct pushes to the primary branch.
+
+## CI
+
+None exists yet. When the stack and host exist, PRs should run the relevant subset of: install, lint, format check, types/static analysis, tests, build. Do not auto-deploy production because CI passed. Prefer caching and fail-fast. Do not add a giant pipeline without justification.
+
+## Release
+
+No versioning scheme exists yet. Prefer the stack's existing release tool if one appears. Semantic versioning only if the project is actually versioned that way. Do not add heavyweight release infrastructure for a small internal app.

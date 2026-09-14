@@ -1,0 +1,31 @@
+---
+description: Project architecture and engineering conventions for this CRM workspace
+alwaysApply: true
+---
+
+# Engineering
+
+No application stack is present yet. Inspect the tree before assuming language, framework, or directory layout. When code lands, follow it; then update this rule with facts.
+
+## Working rules
+
+- Read existing code and tests before adding abstractions.
+- Reuse established patterns; do not introduce a parallel architecture.
+- Smallest coherent change. No drive-by refactors.
+- Preserve backwards compatibility unless the task says otherwise.
+- Error handling must match existing style once one exists.
+- Do not modify old applied migrations unless project policy explicitly allows it.
+- Prefer reversible schema changes. Separate destructive cleanup from compatibility migrations.
+- Never execute destructive production database operations.
+
+## When CRM domain code appears
+
+Treat as HIGH until proven otherwise: authentication, authorization, tenant isolation, PII, exports, payments/billing, webhooks, financial calculations, file uploads.
+
+If the app becomes multi-tenant, every query, job, cache key, export, WebSocket path, log line, and admin tool must stay tenant-scoped.
+
+If money is calculated, do not use binary floating-point for currency; consider rounding, timezones, idempotency, and auditability.
+
+## External integrations
+
+Idempotency, retries, timeouts, partial failure, duplicate/out-of-order events, signatures, replay, rate limits, API-version compatibility. Never make irreversible production calls to "test."

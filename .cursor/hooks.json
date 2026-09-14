@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeShellExecution": [
+      {
+        "command": "node .cursor/hooks/guard-shell.js",
+        "timeout": 10
+      }
+    ],
+    "beforeReadFile": [
+      {
+        "command": "node .cursor/hooks/guard-secrets.js",
+        "timeout": 10
+      }
+    ]
+  }
+}

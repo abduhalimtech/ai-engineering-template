@@ -1,0 +1,23 @@
+# Secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+credentials.json
+**/serviceAccount*.json
+id_rsa
+id_ed25519
+*.pem
+*.p12
+*.pfx
+
+# Dependencies (when a stack appears)
+node_modules/
+vendor/
+.venv/
+__pycache__/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
